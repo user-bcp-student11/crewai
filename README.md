@@ -28,6 +28,41 @@ El orden es `architect → backend → frontend → testing → security → cha
 Chapter reemplaza al LT como revisor final. La aprobación humana se conserva entre etapas.
 Consulta [TEAM.md](TEAM.md) para crear el repo de tu equipo y repartir los archivos.
 
+## Crew para los agentes ReqFlow
+
+Los agentes Markdown de `.github/agents/` son instrucciones de Copilot y no se ejecutan
+directamente como agentes CrewAI. Su adaptación para CrewAI vive separada en
+`agents/reqflow/` y conserva las responsabilidades y gates de Discovery, PM-PO,
+OpenSpec, Architect, Developer y Orquestador. Esta separación mantiene intacto el
+flujo didáctico de seis agentes descrito arriba.
+
+`crew/reqflow.py` construye una Crew de un solo paso para cada fase:
+
+```python
+from crew.reqflow import build_intake_crew, build_stage_crew
+
+request = {"title": "...", "description": "...", "acceptance_criteria": ["..."]}
+intake = build_intake_crew(request)
+recommendation = intake.kickoff()
+
+discovery_crew = build_stage_crew("discovery", request)
+evidence = discovery_crew.kickoff()
+
+pm_crew = build_stage_crew(
+    "pm_po",
+    request,
+    approved_stages={"discovery"},  # aprobación humana del hallazgo
+    prior_outputs={"discovery": str(evidence)},
+)
+```
+
+Las etapas posteriores requieren que la persona marque las aprobaciones previas y
+proporcione sus artefactos. Por ejemplo, Architect exige aprobación y contenido de
+PM-PO y OpenSpec; Developer exige además arquitectura aprobada. Se crea y ejecuta
+cada etapa por separado para no saltarse esos gates. El agente Developer redacta
+cambios y reporta verificaciones; la ejecución efectiva de comandos depende de las
+herramientas disponibles en el runtime.
+
 ## Preparar el entorno
 
 Requiere Python 3.11 a 3.13, Git y acceso a GitHub Copilot.
