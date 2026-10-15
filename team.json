@@ -1,0 +1,10 @@
+{
+  "roles": {
+    "architect": "Victor Magallanes",
+    "backend": "Jose Juape",
+    "frontend": "usuario-frontend",
+    "testing": "Angel Namay",
+    "security": "Estefany Cerron",
+    "chapter": "Jose Peralta"
+  }
+}
