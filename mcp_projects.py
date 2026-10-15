@@ -291,11 +291,27 @@ def list_issues() -> list[dict]:
 
 # ── GitHub Projects (v2) — proyecto asignado + backlog ──────────────────────
 
+def _project_from_env() -> list[dict]:
+    """Proyecto fijado con PROJECT_ID (node ID PVT_...) cuando el MCP no lista proyectos."""
+    project_id = os.getenv("PROJECT_ID", "").strip()
+    if not project_id:
+        return []
+    p = call_tool("manage_project", {"action": "get", "projectId": project_id})
+    return [{
+        "id":     p.get("id", project_id),
+        "title":  p.get("title", "(sin título)"),
+        "number": p.get("number"),
+        "closed": bool(p.get("closed", False)),
+    }]
+
+
 def list_projects() -> list[dict]:
     """Lista los GitHub Projects (v2) visibles para el MCP.
 
     Llama a manage_project (action "list") y normaliza la respuesta:
         [{"id": "PVT_...", "title": "...", "number": 1, "closed": False}, ...]
+
+    Si el MCP no devuelve proyectos, usa PROJECT_ID del entorno.
     """
     result = call_tool("manage_project", {"action": "list", "status": "all", "limit": 20})
     if isinstance(result, list):
@@ -303,7 +319,7 @@ def list_projects() -> list[dict]:
     else:
         raw = result.get("projects", result.get("items", []))
 
-    return [
+    projects = [
         {
             "id":     p.get("id"),
             "title":  p.get("title", p.get("name", "(sin título)")),
@@ -312,6 +328,7 @@ def list_projects() -> list[dict]:
         }
         for p in raw
     ]
+    return projects or _project_from_env()
 
 
 def _normalize_project_item(it: dict) -> dict:
