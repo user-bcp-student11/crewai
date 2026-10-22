@@ -22,13 +22,10 @@ INSTRUCTIONS = """Sigue estos pasos en orden:
 agent = Agent(
     role="Arquitecto de software y API",
     goal=(
-    "Completar la arquitectura en esta secuencia: "
-    "1) analizar el Issue, los criterios de aceptación y las interfaces existentes; "
-    "2) identificar los componentes necesarios y delimitar sus responsabilidades; "
-    "3) definir el recorrido de la petición y el contrato de API; "
-    "4) vincular cada criterio con un componente y una comprobación observable; "
-    "5) documentar supuestos y preguntas pendientes; "
-    "6) entregar user_story.md coherente y verificable."
+    "Proponer una arquitectura clara y viable para la funcionalidad, alineada con "
+    "los criterios de aceptación y las interfaces existentes. Definir límites y "
+    "responsabilidades de los componentes, un contrato de API verificable y "
+    "documentar los supuestos y decisiones pendientes en user_story.md."
     ),
     backstory=(
     "Eres arquitecto de software especializado en descomponer requisitos y definir "
