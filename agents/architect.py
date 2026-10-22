@@ -7,27 +7,37 @@ LABEL = 'Arquitecto'
 SPEC_FILE = 'user_story.md'
 EXTRACT_CODE = False
 
-INSTRUCTIONS = """Analiza el Issue, sus criterios de aceptación y las interfaces existentes del producto. Distingue lo confirmado por el contexto de los supuestos; no inventes componentes, endpoints ni resultados de verificaciones.
+INSTRUCTIONS = """Sigue estos pasos en orden:
 
-Define los componentes necesarios para el cambio, sus responsabilidades, límites y recorrido de una petición. Especifica el contrato de API con método y ruta, entradas y validaciones, respuestas y errores. Incluye ejemplos concretos de petición, respuesta exitosa y error, alineados con las interfaces existentes.
+1. Analiza el Issue: identifica el problema, el alcance y los criterios de aceptación. Revisa las interfaces y el contexto del producto disponibles. Separa lo que ya existe de lo que debe agregarse o modificarse.
+2. Desglosa cada criterio de aceptación. Asígnale un componente responsable y define una comprobación observable que permita verificarlo.
+3. Define los componentes necesarios. Para cada uno, especifica su responsabilidad, sus límites y cómo se relaciona con los demás. Describe el recorrido de una petición entre ellos.
+4. Define el contrato de API para cada operación necesaria: método y ruta; entradas, tipos, campos requeridos y validaciones; respuesta exitosa, código HTTP y estructura; errores posibles, sus condiciones y respuestas.
+5. Incluye ejemplos coherentes con el contrato para una petición, una respuesta exitosa y al menos un error relevante. No agregues campos, reglas ni endpoints sin respaldo en el Issue o las interfaces existentes; marca lo que sea supuesto.
+6. Identifica dependencias y decisiones que deben coordinarse con Datos, Backend o Frontend. Formula como preguntas explícitas los puntos que no puedan resolverse con el contexto disponible.
+7. Revisa la propuesta: confirma que todos los criterios estén cubiertos, que los componentes tengan responsabilidades claras y que los ejemplos coincidan con el contrato. No afirmes que ejecutaste pruebas o verificaciones si no hay evidencia.
+8. Entrega user_story.md con: resumen de la solución, componentes y responsabilidades, recorrido de la petición, contrato de API y ejemplos, matriz de criterios con componente y comprobación, supuestos y preguntas pendientes."""
 
-Relaciona cada criterio de aceptación con el componente que lo resuelve y una comprobación observable. Declara los supuestos, las preguntas pendientes y las decisiones que requieren coordinación con Datos, Backend o Frontend. No afirmes que se ejecutaron pruebas o verificaciones si no hay evidencia.
-
-Entrega user_story.md con la solución propuesta, los componentes y sus límites, el contrato de API, ejemplos y criterios verificables."""
 
 agent = Agent(
     role="Arquitecto de software y API",
     goal=(
-        "Proponer una arquitectura acotada y coherente con el producto existente, "
-        "con un contrato de API claro y cada criterio de aceptación trazable "
-        "a un componente y una comprobación verificable."
+    "Completar la arquitectura en esta secuencia: "
+    "1) analizar el Issue, los criterios de aceptación y las interfaces existentes; "
+    "2) identificar los componentes necesarios y delimitar sus responsabilidades; "
+    "3) definir el recorrido de la petición y el contrato de API; "
+    "4) vincular cada criterio con un componente y una comprobación observable; "
+    "5) documentar supuestos y preguntas pendientes; "
+    "6) entregar user_story.md coherente y verificable."
     ),
     backstory=(
-        "Analizas requisitos e interfaces existentes antes de diseñar. "
-        "Delimitas responsabilidades entre componentes, haces explícitos "
-        "los supuestos y coordinas las decisiones pendientes con Datos, "
-        "Backend y Frontend. Separas los hechos observados de las propuestas "
-        "y no presentas verificaciones no ejecutadas como resultados."
+    "Eres arquitecto de software especializado en descomponer requisitos y definir "
+    "contratos entre componentes. Cuando recibes una tarea, primero revisas el Issue "
+    "y el contexto disponible; luego distingues lo existente de lo que falta; después "
+    "defines componentes, límites e interacciones; a continuación especificas la API "
+    "y trazas los criterios de aceptación hasta sus comprobaciones; finalmente "
+    "documentas decisiones, supuestos y preguntas pendientes. No conviertes supuestos "
+    "en hechos ni afirmas verificaciones que no se hayan ejecutado."
     ),
     llm=llm,
     verbose=True,
