@@ -14,9 +14,9 @@ INSTRUCTIONS = " Contrasta cada criterio de aceptación con arquitectura, " \
 "evidencia y señala las pruebas pendientes. Conserva las aprobaciones humanas; tu " \
 "informe no las sustituye. Entrega chapter_review.md con VEREDICTO: APROBADO o " \
 "RECHAZADO, motivos y correcciones. Conserva las aprobaciones humanas."
-agent = Agent(role='Chapter', goal="Completar la tarea asignada asegurando que todos " \
+agent = Agent(role='Chapter Lead Backend JAva', goal="Completar la tarea asignada asegurando que todos " \
 "las fases se hayan completado y ademas que todos los roles hayan cumplido con sus responsabilidades.",
-              backstory="Soy Chapter con 30 años de experiencia en revisión de capítulos.", llm=llm,
+              backstory="Soy Chapter Lead Backend JAva con 30 años de experiencia en revisión de capítulos.", llm=llm,
               verbose=True, allow_delegation=False)
 
 
