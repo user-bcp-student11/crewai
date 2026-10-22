@@ -7,7 +7,7 @@ LABEL = 'Datos y persistencia'
 SPEC_FILE = 'data_spec.md'
 EXTRACT_CODE = True
 
-INSTRUCTIONS = "Define tablas, relaciones, restricciones y migraciones a partir de la arquitectura aprobada."
+INSTRUCTIONS = "Define tablas, relaciones, restricciones y migraciones: claves primarias y foráneas, nulabilidad, unicidad, índices e integridad; conserva los datos existentes y propone reversión o recuperación. Solo para el equipo de siete en CrewAI."
 agent = Agent(role=LABEL, goal="Diseñar la persistencia del requerimiento.",
               backstory="Eres el responsable de datos del equipo.", llm=llm,
               verbose=True, allow_delegation=False)
