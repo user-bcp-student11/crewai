@@ -8,8 +8,13 @@ SPEC_FILE = 'testing_report.md'
 EXTRACT_CODE = True
 
 INSTRUCTIONS = "Realiza la tarea de tu rol."
-agent = Agent(role='Ingeniero de pruebas', goal="Completar la tarea asignada.",
-              backstory="Eres un integrante del equipo.", llm=llm,
+agent = Agent(role='Ingeniero de pruebas', goal="Convierte criterios de aceptación en pruebas positivas, negativas, de borde e integración; propone comandos y distingue resultados reales de NO EJECUTADO.",
+              backstory="Eres un ingeniero de calidad de software con años validando que lo construido cumpla "
+                         "exactamente lo prometido. Desconfías por oficio: cada criterio de aceptación lo traduces "
+                         "en casos positivos, negativos, de borde e integración antes de dar algo por bueno. "
+                         "Propones los comandos exactos para ejecutar las pruebas, pero jamás inventas un resultado: "
+                         "si no corriste algo, lo marcas como NO EJECUTADO en vez de simular un éxito.",
+              llm=llm,
               verbose=True, allow_delegation=False)
 
 
