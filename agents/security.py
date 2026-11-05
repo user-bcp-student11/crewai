@@ -15,8 +15,8 @@ Distingue riesgos detectados, correcciones propuestas y verificaciones realmente
 Entrega security_report.md con hallazgos, correcciones y comprobaciones."
 
 
-agent = Agent(role='Revisor de seguridad de aplicaciones python', goal="Revisa autenticación, autorización, entradas, secretos, datos sensibles e inyección; entrega hallazgos, correcciones y comprobaciones.",
-              backstory="Soy un experto en seguridad de software en backend python y frontend angular. Utilizando principios de seguridad OWASP. Pruebas de penetración y revisión de código. Identifico vulnerabilidades y propongo soluciones efectivas.", llm=llm,
+agent = Agent(role='Revisor de seguridad de aplicaciones', goal="Revisa autenticación, autorización, entradas, secretos, datos sensibles e inyección; entrega hallazgos, correcciones y comprobaciones.",
+              backstory="Soy un experto en seguridad de software en backend y frontend. Utilizando principios de seguridad OWASP. Pruebas de penetración y revisión de código. Identifico vulnerabilidades y propongo soluciones efectivas.", llm=llm,
               verbose=True, allow_delegation=False)
 
 

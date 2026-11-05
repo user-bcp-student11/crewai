@@ -50,7 +50,7 @@ Organiza user_story.md en las siguientes secciones:
 """
 
 agent = Agent(
-    role='Arquitecto',
+    role='Arquitecto de Software y Soluciones',
     goal=(
         'Transformar los requisitos de una funcionalidad en una especificación '
         'de arquitectura clara, trazable y verificable.'
